@@ -14,4 +14,4 @@ jobs:
         run: postman login --with-api-key ${{ secrets.SUPER_TOKEN }}
       - name: Run API tests
         run: |
-          postman collection run "1277254-042fd2c8-f747-497a-bc79-927fb2edc307"
+          postman collection run "1277254-0adcf6cc-9b9c-4302-a718-a97d9edb7fcb"
