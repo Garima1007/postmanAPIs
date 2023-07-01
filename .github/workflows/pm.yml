@@ -11,7 +11,7 @@ jobs:
         run: |
           curl -o- "https://dl-cli.pstmn.io/install/osx_64.sh" | sh
       - name: Login to Postman CLI
-        run: postman login --with-api-key PMAK-649e9b856b03c500397f2e2c-d4fd36dc2369b90cdc3e6d74226b2064e3
+        run: postman login --with-api-key PMAK-649f0373fa07d60032982bc4-e7f022e369d1006b4cc9314ee9145dbf24
       - name: Run API tests
         run: |
-          postman collection run "1277254-2b01197b-ba52-4002-8f2b-f68f83b479ae"
+          postman collection run "1277254-042fd2c8-f747-497a-bc79-927fb2edc307"
