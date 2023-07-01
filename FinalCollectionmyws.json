@@ -1,0 +1,807 @@
+{
+	"info": {
+		"_postman_id": "042fd2c8-f747-497a-bc79-927fb2edc307",
+		"name": "API Testing Assignment Copy",
+		"description": "This colection contains requests from API [https://reqres.in.](https://desktop.postman.com/?desktopVersion=10.15.0&userId=1277254&teamId=0)\n\nIt contains the following requests:\n\n- Get user list (/api/users/)\n- Get user details with userID 4(/api/users/4)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "1277254"
+	},
+	"item": [
+		{
+			"name": "Users List",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//POSITIVE TEST CASES",
+							"",
+							"//1. Validate the Status code",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"",
+							"//2. Validate that the code name has string",
+							"pm.test(\"Status code name has string OK\", function () {",
+							"    pm.response.to.have.status(\"OK\");",
+							"});",
+							"",
+							"",
+							"//3. Validate response time is less than 500ms",
+							"pm.test(\"Response time is less than 500ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(500);",
+							"});",
+							"",
+							"",
+							"//4. Validate response headers are present",
+							"pm.test(\"Verify Content-Type header is present\", function () {",
+							"    pm.response.to.have.header(\"Content-Type\");",
+							"});",
+							"",
+							"",
+							"//5. Validate that the Content-Type header is application/json; charset=utf-8",
+							"pm.test(\"Verify Content-Type header is application/json; charset=utf-8\", function () {",
+							"    pm.response.to.be.header(\"Content-Type\",\"application/json; charset=utf-8\"); ",
+							"});",
+							"",
+							"//6. Validate that the Date header is present",
+							"pm.test(\"Verify Date header is present\", function () {",
+							"    pm.response.to.have.header(\"Date\");",
+							"});",
+							"",
+							"//7. Validate that the Content-Encoding header is present",
+							"pm.test(\"Verify Content-Encoding header is available\", function () {",
+							"\tpm.response.to.have.header(\"Content-Encoding\")",
+							"});",
+							"",
+							"",
+							"//8. Verify the page number of the API Response",
+							"pm.test(\"Verify that the page number of the API Response is 1\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.page).to.eql(1);",
+							"});",
+							"",
+							"",
+							"//9. Verify the number of users shown per page",
+							"pm.test(\"Verify the number of users shown per page is 6\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.per_page).to.eql(6);",
+							"    console.log(jsonData.data.length);",
+							"});",
+							"",
+							"",
+							"//10. Verify the total number of users",
+							"pm.test(\"Verify the total number of users is 12\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.total).to.eql(12);",
+							"});",
+							"",
+							"",
+							"//11. Verify the total number of pages which are there in the API",
+							"pm.test(\"Verify the total number of pages which are there in the API is 2\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.total_pages).to.eql(2);",
+							"});",
+							"",
+							"",
+							"//12. Validate JSON schema",
+							"var schema = {",
+							"  \"$schema\": \"http://json-schema.org/draft-04/schema#\",",
+							"  \"type\": \"object\",",
+							"  \"properties\": {",
+							"    \"page\": {",
+							"      \"type\": \"integer\"",
+							"    },",
+							"    \"per_page\": {",
+							"      \"type\": \"integer\"",
+							"    },",
+							"    \"total\": {",
+							"      \"type\": \"integer\"",
+							"    },",
+							"    \"total_pages\": {",
+							"      \"type\": \"integer\"",
+							"    },",
+							"    \"data\": {",
+							"      \"type\": \"array\",",
+							"      \"items\": [",
+							"        {",
+							"          \"type\": \"object\",",
+							"          \"properties\": {",
+							"            \"id\": {",
+							"              \"type\": \"integer\"",
+							"            },",
+							"            \"email\": {",
+							"              \"type\": \"string\"",
+							"            },",
+							"            \"first_name\": {",
+							"              \"type\": \"string\"",
+							"            },",
+							"            \"last_name\": {",
+							"              \"type\": \"string\"",
+							"            },",
+							"            \"avatar\": {",
+							"              \"type\": \"string\"",
+							"            }",
+							"          },",
+							"          \"required\": [",
+							"            \"id\",",
+							"            \"email\",",
+							"            \"first_name\",",
+							"            \"last_name\",",
+							"            \"avatar\"",
+							"          ]",
+							"        },",
+							"        {",
+							"          \"type\": \"object\",",
+							"          \"properties\": {",
+							"            \"id\": {",
+							"              \"type\": \"integer\"",
+							"            },",
+							"            \"email\": {",
+							"              \"type\": \"string\"",
+							"            },",
+							"            \"first_name\": {",
+							"              \"type\": \"string\"",
+							"            },",
+							"            \"last_name\": {",
+							"              \"type\": \"string\"",
+							"            },",
+							"            \"avatar\": {",
+							"              \"type\": \"string\"",
+							"            }",
+							"          },",
+							"          \"required\": [",
+							"            \"id\",",
+							"            \"email\",",
+							"            \"first_name\",",
+							"            \"last_name\",",
+							"            \"avatar\"",
+							"          ]",
+							"        },",
+							"        {",
+							"          \"type\": \"object\",",
+							"          \"properties\": {",
+							"            \"id\": {",
+							"              \"type\": \"integer\"",
+							"            },",
+							"            \"email\": {",
+							"              \"type\": \"string\"",
+							"            },",
+							"            \"first_name\": {",
+							"              \"type\": \"string\"",
+							"            },",
+							"            \"last_name\": {",
+							"              \"type\": \"string\"",
+							"            },",
+							"            \"avatar\": {",
+							"              \"type\": \"string\"",
+							"            }",
+							"          },",
+							"          \"required\": [",
+							"            \"id\",",
+							"            \"email\",",
+							"            \"first_name\",",
+							"            \"last_name\",",
+							"            \"avatar\"",
+							"          ]",
+							"        },",
+							"        {",
+							"          \"type\": \"object\",",
+							"          \"properties\": {",
+							"            \"id\": {",
+							"              \"type\": \"integer\"",
+							"            },",
+							"            \"email\": {",
+							"              \"type\": \"string\"",
+							"            },",
+							"            \"first_name\": {",
+							"              \"type\": \"string\"",
+							"            },",
+							"            \"last_name\": {",
+							"              \"type\": \"string\"",
+							"            },",
+							"            \"avatar\": {",
+							"              \"type\": \"string\"",
+							"            }",
+							"          },",
+							"          \"required\": [",
+							"            \"id\",",
+							"            \"email\",",
+							"            \"first_name\",",
+							"            \"last_name\",",
+							"            \"avatar\"",
+							"          ]",
+							"        },",
+							"        {",
+							"          \"type\": \"object\",",
+							"          \"properties\": {",
+							"            \"id\": {",
+							"              \"type\": \"integer\"",
+							"            },",
+							"            \"email\": {",
+							"              \"type\": \"string\"",
+							"            },",
+							"            \"first_name\": {",
+							"              \"type\": \"string\"",
+							"            },",
+							"            \"last_name\": {",
+							"              \"type\": \"string\"",
+							"            },",
+							"            \"avatar\": {",
+							"              \"type\": \"string\"",
+							"            }",
+							"          },",
+							"          \"required\": [",
+							"            \"id\",",
+							"            \"email\",",
+							"            \"first_name\",",
+							"            \"last_name\",",
+							"            \"avatar\"",
+							"          ]",
+							"        },",
+							"        {",
+							"          \"type\": \"object\",",
+							"          \"properties\": {",
+							"            \"id\": {",
+							"              \"type\": \"integer\"",
+							"            },",
+							"            \"email\": {",
+							"              \"type\": \"string\"",
+							"            },",
+							"            \"first_name\": {",
+							"              \"type\": \"string\"",
+							"            },",
+							"            \"last_name\": {",
+							"              \"type\": \"string\"",
+							"            },",
+							"            \"avatar\": {",
+							"              \"type\": \"string\"",
+							"            }",
+							"          },",
+							"          \"required\": [",
+							"            \"id\",",
+							"            \"email\",",
+							"            \"first_name\",",
+							"            \"last_name\",",
+							"            \"avatar\"",
+							"          ]",
+							"        }",
+							"      ]",
+							"    }",
+							"  },",
+							"  \"required\": [",
+							"    \"page\",",
+							"    \"per_page\",",
+							"    \"total\",",
+							"    \"total_pages\",",
+							"    \"data\"",
+							"  ]",
+							"}",
+							"",
+							"var jsonResponse = pm.response.json();",
+							"pm.test('Validate response against schema', function () {",
+							"  pm.expect(tv4.validate(jsonResponse, schema)).to.be.true;",
+							"});",
+							"",
+							"",
+							"//13. Validate that the data is not null",
+							"var resBody = pm.response.json();",
+							"pm.test(\"Verify id is not null\", function () {",
+							"    pm.expect(resBody.data.id).to.not.null;",
+							"});",
+							"",
+							"//14.",
+							"var resBody = pm.response.json();",
+							"pm.test(\"Verify email is not null\", function () {",
+							"    pm.expect(resBody.data.email).to.not.null;",
+							"});",
+							"",
+							"//15.",
+							"var resBody = pm.response.json();",
+							"pm.test(\"Verify first name is not null\", function () {",
+							"    pm.expect(resBody.data.first_name).to.not.null;",
+							"});",
+							"",
+							"//16.",
+							"var resBody = pm.response.json();",
+							"pm.test(\"Verify last name is not null\", function () {",
+							"    pm.expect(resBody.data.last_name).to.not.null;",
+							"});",
+							"",
+							"//17.",
+							"var resBody = pm.response.json();",
+							"pm.test(\"Verify avatar not null\", function () {",
+							"    pm.expect(resBody.data.avatar).to.not.null;",
+							"});",
+							"",
+							"",
+							"//18. Validate email address format",
+							"pm.test(\"Validate email format\", function (){",
+							"    pm.response.json().data.map((user) => {",
+							" if (/^\\w+([\\.-]?\\w+)*@\\w+([\\.-]?\\w+)*(\\.\\w{2,3})+$/.test(user.email))",
+							"  {",
+							"    return (true)",
+							"  }",
+							"    alert(\"You have entered an invalid email address!\")",
+							"    return (false)",
+							"    });",
+							"});",
+							"",
+							"//19. Validate Specific user's data",
+							"pm.test(\"Verify user 1 data\", function () {",
+							"    const responseJson = pm.response.json();",
+							"    const user = responseJson.data[0];",
+							"",
+							"    pm.expect(user.id).to.eql(1);",
+							"    pm.expect(user.first_name).to.eql(\"George\");",
+							"    pm.expect(user.last_name).to.eql(\"Bluth\");",
+							"    pm.expect(user.email).to.eql(\"george.bluth@reqres.in\");",
+							"    pm.expect(user.avatar).to.eql(\"https://reqres.in/img/faces/1-image.jpg\");",
+							"});",
+							"",
+							"//20.",
+							"pm.test(\"Verify user 2 data\", function () {",
+							"    const responseJson = pm.response.json();",
+							"    const user = responseJson.data[1];",
+							"",
+							"    pm.expect(user.id).to.eql(2);",
+							"    pm.expect(user.first_name).to.eql(\"Janet\");",
+							"    pm.expect(user.last_name).to.eql(\"Weaver\");",
+							"    pm.expect(user.email).to.eql(\"janet.weaver@reqres.in\");",
+							"    pm.expect(user.avatar).to.eql(\"https://reqres.in/img/faces/2-image.jpg\");",
+							"});",
+							"",
+							"//21.",
+							"pm.test(\"Verify user 3 data\", function () {",
+							"    const responseJson = pm.response.json();",
+							"    const user = responseJson.data[2];",
+							"",
+							"    pm.expect(user.id).to.eql(3);",
+							"    pm.expect(user.first_name).to.eql(\"Emma\");",
+							"    pm.expect(user.last_name).to.eql(\"Wong\");",
+							"    pm.expect(user.email).to.eql(\"emma.wong@reqres.in\");",
+							"    pm.expect(user.avatar).to.eql(\"https://reqres.in/img/faces/3-image.jpg\");",
+							"});",
+							"",
+							"//22.",
+							"pm.test(\"Verify user 4 data\", function () {",
+							"    const responseJson = pm.response.json();",
+							"    const user = responseJson.data[3];",
+							"",
+							"    pm.expect(user.id).to.eql(4);",
+							"    pm.expect(user.first_name).to.eql(\"Eve\");",
+							"    pm.expect(user.last_name).to.eql(\"Holt\");",
+							"    pm.expect(user.email).to.eql(\"eve.holt@reqres.in\");",
+							"    pm.expect(user.avatar).to.eql(\"https://reqres.in/img/faces/4-image.jpg\");",
+							"});",
+							"",
+							"//23.",
+							"pm.test(\"Verify user 5 data\", function () {",
+							"    const responseJson = pm.response.json();",
+							"    const user = responseJson.data[4];",
+							"",
+							"    pm.expect(user.id).to.eql(5);",
+							"    pm.expect(user.first_name).to.eql(\"Charles\");",
+							"    pm.expect(user.last_name).to.eql(\"Morris\");",
+							"    pm.expect(user.email).to.eql(\"charles.morris@reqres.in\");",
+							"    pm.expect(user.avatar).to.eql(\"https://reqres.in/img/faces/5-image.jpg\");",
+							"});",
+							"",
+							"//24.",
+							"pm.test(\"Verify user 6 data\", function () {",
+							"    const responseJson = pm.response.json();",
+							"    const user = responseJson.data[5];",
+							"",
+							"    pm.expect(user.id).to.eql(6);",
+							"    pm.expect(user.first_name).to.eql(\"Tracey\");",
+							"    pm.expect(user.last_name).to.eql(\"Ramos\");",
+							"    pm.expect(user.email).to.eql(\"tracey.ramos@reqres.in\");",
+							"    pm.expect(user.avatar).to.eql(\"https://reqres.in/img/faces/6-image.jpg\");",
+							"});",
+							"",
+							"//25. Verify the support url is present",
+							"pm.test(\"Response body has support field\", function () {",
+							"    pm.expect(pm.response.json()).to.have.property(\"support\");",
+							"});",
+							"",
+							"//26. Verify the support url is https://reqres.in/#support-heading",
+							"pm.test(\"Verify the support url is https://reqres.in/#support-heading\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.support.url).to.eql(\"https://reqres.in/#support-heading\");",
+							"    console.log(jsonData.support.url);",
+							"});",
+							"",
+							"//27. Verify the support text is \"To keep ReqRes free, contributions towards server costs are appreciated!\"",
+							"pm.test(\"Verify the support text is 'To keep ReqRes free, contributions towards server costs are appreciated!'\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.support.text).to.eql(\"To keep ReqRes free, contributions towards server costs are appreciated!\");",
+							"    console.log(jsonData.support.text);",
+							"});",
+							"",
+							"",
+							"//NEGATIVE TEST CASES",
+							"",
+							"//28. Validate endpoint does not return unexpected status codes",
+							"pm.test(\"The endpoint does not return unexpected status codes\", function () {",
+							"    const unexpectedStatusCode = [404, 400, 401, 403];",
+							"    pm.response.to.not.have.status(unexpectedStatusCode);",
+							"});",
+							"",
+							"",
+							"//29. Verify the number of users shown per page is not more than 6",
+							"pm.test(\"Verify the number of users shown per page is not more than 6\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.per_page).not.to.be.above(6);",
+							"});",
+							"",
+							"",
+							"//30. Verify the total number of users",
+							"pm.test(\"Verify the total number of users is not more than 12\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.total).not.to.be.above(12);",
+							"});",
+							"",
+							"",
+							"//31. Verify the total number of pages which are there in the API",
+							"pm.test(\"Verify the total number of pages which are there in the API is not more than 2\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.total_pages).not.to.be.above(2);",
+							"});",
+							"",
+							"",
+							"//32. Validate that the id is not zero",
+							"pm.test(\"Validate that the id is not 0\", function (){",
+							"    var responseJson = pm.response.json();",
+							"    pm.expect(\"responseJson.data.id\").to.not.eql(0);",
+							"});",
+							"",
+							"",
+							"//Storing user information of user 4",
+							"pm.collectionVariables.set(\"user4\", pm.response.json().data[3]);",
+							"console.log(pm.response.json().data[3]);",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"user-agent": true
+				}
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/api/users",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"users"
+					]
+				},
+				"description": "The above request fetch the user list with details in the response body. The response is in JSON format and consistes of the following information:\n\n1. page: This displays the number of pages the API has\n2. per-page: This displays the number of users shown per page\n3. total: This displays the total number of users\n4. total_pages: This displays the total number of pages which are there in the API\n5. data: This displays the user data. The user data is then consists of:\n    \n\n- id: The unique identifier of the user\n- email: The email address of the user\n- first_name: The first name of the user\n- last_name: The last name of the user\n- avatar: A URL of the user's avatar image\n    \n\nThe API responds with a status code 200 OK which indicates that the request was successful. Below is the url to try and see the response of this API ([https://reqres.in/api/users](https://reqres.in/api/users)) in the response body as JSON and headers.\n\n[https://web.postman.co/workspace/afef08ec-7a1d-485b-873e-d04ea26ca2f6/example/1277254-c0a1e263-90d1-4106-bcb8-80e7059ebe15](https://web.postman.co/workspace/afef08ec-7a1d-485b-873e-d04ea26ca2f6/example/1277254-c0a1e263-90d1-4106-bcb8-80e7059ebe15)\n\n**Test Cases:**\n\n1. In the first and second test case, we are verifying the status code of the API is 200 and the status code name has a string OK.\n2. Third test case depicts that the response time is less than 250ms.\n3. In the forth, fifth, sixth and the seventh test case, we are validating that the API returns the required response headers. Sixth test verifies the Content-Type header is application/json; charset=utf-8.\n4. Test case 8 verifies the page number of the API Response. Here, we have used **pm.expect()** function along with **.to.eql** assertion to validate our test case.\n5. Test case 9 verifies the number of users shown per page. Here also, we have used **pm.expect()** function along with **.to.eql** assertion to validate our test case.\n6. Test case 10 verifies the total number of users fetched from the API response using **pm.expect()** function and **.to.eql** assertion.\n7. Test Case 11 depicts the total number of pages which are there in the API is 2, using **pm.expect()** function and **.to.eql** assertion.\n8. Test case 12 validates the JSON Schema of the API Response.\n9. Test case 13-17 verifies that the data is not null, using **pm.expect()** function and **.to.not.null** assertion.\n10. Test case 18 validates that the email format is correct. Here, we are reading each user email using map() and matching each of them with the regular expression using if condition. The function returns true if the email format is valid and false if not valid after raising an alert message.\n11. Test case 19-24 verifies if the specific user data is correct or not. In this, we are traversing the JSON response from the response body and retrieving the value of each of the data property in a variable. Using **pm.expect()** function and **.to.eql** assertion, we are validating each user's data.\n12. Test 25 and 26 verifies that the support field is present and the support url is [https://reqres.in/#support-heading,](https://reqres.in/#support-heading,) matching with that received in the API response. In test 25, we are using **pm.expect()** and **.to.have.property** assertion for verifying if the Support property is present in the body or not.\n13. Test case 27 verifies the support text is \"To keep ReqRes free, contributions towards server costs are appreciated!\" This test case also uses **pm.expect()** and **.to.eql** assertion.\n14. Test Cases 28 to 32 defines the negative test cases:\n    \n\n- In test case 28, we are verifying to make sure that the endpoint does not return an unexpected status code.\n- Test case 29 verifies the number of users shown per page is not more than 6. This test case uses **pm.expect()** and **.not.to.be.above()** assertion.\n- Test case 30 verifies that the total number of users received in the response are not more than 12. This test case also uses **pm.expect()** and **.not.to.be.above()** assertion.\n- Test case 31 verifies that the total number of pages which are there in the API is not more than 2. This test case too uses **pm.expect()** and **.not.to.be.above()** assertion.\n- Test case 32 validates that the id is not zero. This test case uses **pm.expect()** and **.not.to.eql()** assertion.\n    \n\nThere could be more negative test cases which are currently not in the scope of this API as this API is not intended for production use and the data returned is not real or persistent. It is primarily used for testing or showcasing API functionality. These test cases could be:\n\n1. Sending a GET request with an invalid user ID and ensuring that it returns an appropriate error response i.e., 404 - Not Found.\n2. Checking the API's behavior when the endpoint is incorrect or unavailable and verify that it returns a 404 - Not Found response.\n3. Validating that the API returns an appropriate error response e.g., 400 - Bad Request when invalid query parameters are provided.\n4. Testing the behaviour of the API by using unsupported http methods like PUT, DELETE, and make sure that is returns 405 - Method Not Allowed status.\n5. Checking the API's behavior when unauthorized access is attempted and verifying that it returns a 401 - Unauthorized response. This could also be considered as a security test case.\n    \n\nLastly, in the Tests, we are storing the user information of Id=4. We are storing the information in a collection level variable using **pm.collectionVariables.set().** We will then access this stored user information in our upcoming requests."
+			},
+			"response": [
+				{
+					"name": "Users List",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://reqres.in/api/users/",
+							"protocol": "https",
+							"host": [
+								"reqres",
+								"in"
+							],
+							"path": [
+								"api",
+								"users",
+								""
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Tue, 27 Jun 2023 14:07:28 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Etag",
+							"value": "W/\"3e4-2RLXvr5wTg9YQ6aH95CkYoFNuO8\""
+						},
+						{
+							"key": "Via",
+							"value": "1.1 vegur"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "max-age=14400"
+						},
+						{
+							"key": "CF-Cache-Status",
+							"value": "HIT"
+						},
+						{
+							"key": "Age",
+							"value": "65"
+						},
+						{
+							"key": "Report-To",
+							"value": "{\"endpoints\":[{\"url\":\"https:\\/\\/a.nel.cloudflare.com\\/report\\/v3?s=3MPzRyk2itf5vA%2BjEAjNti5JDxWjvRwfJmPD9O3zL%2F%2BlWfD9Sb5g5PCZGOJbRAUwfSa%2F6Eb9tD6OWcsu8SpU9qxIF6PPI0l6I4ADZyVlhNDPZRpDLD4oK6S7Tw%3D%3D\"}],\"group\":\"cf-nel\",\"max_age\":604800}"
+						},
+						{
+							"key": "NEL",
+							"value": "{\"success_fraction\":0,\"report_to\":\"cf-nel\",\"max_age\":604800}"
+						},
+						{
+							"key": "Vary",
+							"value": "Accept-Encoding"
+						},
+						{
+							"key": "Server",
+							"value": "cloudflare"
+						},
+						{
+							"key": "CF-RAY",
+							"value": "7dde41ac3bac45c4-BKK"
+						},
+						{
+							"key": "Content-Encoding",
+							"value": "br"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"page\": 1,\n    \"per_page\": 6,\n    \"total\": 12,\n    \"total_pages\": 2,\n    \"data\": [\n        {\n            \"id\": 1,\n            \"email\": \"george.bluth@reqres.in\",\n            \"first_name\": \"George\",\n            \"last_name\": \"Bluth\",\n            \"avatar\": \"https://reqres.in/img/faces/1-image.jpg\"\n        },\n        {\n            \"id\": 2,\n            \"email\": \"janet.weaver@reqres.in\",\n            \"first_name\": \"Janet\",\n            \"last_name\": \"Weaver\",\n            \"avatar\": \"https://reqres.in/img/faces/2-image.jpg\"\n        },\n        {\n            \"id\": 3,\n            \"email\": \"emma.wong@reqres.in\",\n            \"first_name\": \"Emma\",\n            \"last_name\": \"Wong\",\n            \"avatar\": \"https://reqres.in/img/faces/3-image.jpg\"\n        },\n        {\n            \"id\": 4,\n            \"email\": \"eve.holt@reqres.in\",\n            \"first_name\": \"Eve\",\n            \"last_name\": \"Holt\",\n            \"avatar\": \"https://reqres.in/img/faces/4-image.jpg\"\n        },\n        {\n            \"id\": 5,\n            \"email\": \"charles.morris@reqres.in\",\n            \"first_name\": \"Charles\",\n            \"last_name\": \"Morris\",\n            \"avatar\": \"https://reqres.in/img/faces/5-image.jpg\"\n        },\n        {\n            \"id\": 6,\n            \"email\": \"tracey.ramos@reqres.in\",\n            \"first_name\": \"Tracey\",\n            \"last_name\": \"Ramos\",\n            \"avatar\": \"https://reqres.in/img/faces/6-image.jpg\"\n        }\n    ],\n    \"support\": {\n        \"url\": \"https://reqres.in/#support-heading\",\n        \"text\": \"To keep ReqRes free, contributions towards server costs are appreciated!\"\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "User 4 Details",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const user4 = pm.collectionVariables.get(\"user4\");",
+							"console.log(user4);",
+							"",
+							"",
+							"  const responseJson = pm.response.json();",
+							"  const userId = responseJson.data.id;",
+							"  const userEmail = responseJson.data.email;",
+							"  const firstName = responseJson.data.first_name;",
+							"  const lastName = responseJson.data.last_name;",
+							"  const avatar = responseJson.data.avatar;",
+							"  ",
+							"",
+							"pm.test(\"Validate ID received in the response matches with the set variable\", function () {",
+							"    ",
+							"    const responseValue = responseJson.data.id; ",
+							"    const expectedValue = user4.id; ",
+							"",
+							"    pm.expect(responseValue).to.eql(expectedValue);",
+							"    console.log(responseValue);",
+							"});",
+							"",
+							"",
+							"pm.test(\"Validate email received in the response matches with the set variable\", function () {",
+							"    ",
+							"    const responseValue = responseJson.data.email;",
+							"    const expectedValue = user4.email;",
+							"",
+							"    pm.expect(responseValue).to.eql(expectedValue);",
+							"    console.log(responseValue);",
+							"});",
+							"",
+							"",
+							"pm.test(\"Validate first_name received in the response matches with the set variable\", function () {",
+							"    ",
+							"    const responseValue = responseJson.data.first_name;",
+							"    const expectedValue = user4.first_name;",
+							"",
+							"    pm.expect(responseValue).to.eql(expectedValue);",
+							"    console.log(responseValue);",
+							"});",
+							"",
+							"",
+							"pm.test(\"Validate last_name received in the response matches with the set variable\", function () {",
+							"    ",
+							"    const responseValue = responseJson.data.last_name;",
+							"    const expectedValue = user4.last_name; ",
+							"",
+							"    pm.expect(responseValue).to.eql(expectedValue);",
+							"    console.log(responseValue);",
+							"});",
+							"",
+							"",
+							"pm.test(\"Validate avatar url received in the response matches with the set variable\", function () {",
+							"    ",
+							"    const responseValue = responseJson.data.avatar; ",
+							"    const expectedValue = user4.avatar; ",
+							"",
+							"    pm.expect(responseValue).to.eql(expectedValue);",
+							"    console.log(responseValue);",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/api/users/4 ",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"users",
+						"4 "
+					]
+				},
+				"description": "The above request fecth the user details with Id as 4. The response is in the JSON format and consists of the following details:\n\nid: 4\n\nemail: [eve.holt@reqres.in](mailto:eve.holt@reqres.in)\n\nfirst_name: Eve\n\nlast_name: Holt\n\navatar: [https://reqres.in/img/faces/4-image.jpg](https://reqres.in/img/faces/4-image.jpg)\n\nThe API responds with a status code 200 OK which indicates that the request was successful. Below is the url to try and see the response of this API ([https://reqres.in/api/users](https://desktop.postman.com/?desktopVersion=10.15.0&userId=1277254&teamId=0)) in the response body as JSON and headers.\n\n[https://web.postman.co/workspace/afef08ec-7a1d-485b-873e-d04ea26ca2f6/example/1277254-bd6ef9bf-51df-4f24-af64-4d52073e5225](https://web.postman.co/workspace/afef08ec-7a1d-485b-873e-d04ea26ca2f6/example/1277254-bd6ef9bf-51df-4f24-af64-4d52073e5225)\n\nNext, we have used the stored values (as in previous requests) in assertions within our test script to verify that the response of this API matches with the stored information of id=4. Here, we are accessing the set variable(in the previous request) in a variable **user4** using **pm.collectionVariables.get().**\n\nNow, since we want to validate the id, email, first_name, last_name and avatar against the value of a set variable, we extraxt the value of each of these fields from the response body and assign them to a responseValue variable in each of our tests.\n\nNext, we are retrieving the value of the set variable in expectedValue variable in each of the tests and finally we will use **pm.expect()** function along with **.to.eql()** as assertion to compare **responseValue** with **expectedValue**. If they match, the test will pass. Else, the test will fail."
+			},
+			"response": [
+				{
+					"name": "User 4 Details",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://reqres.in/api/users/4",
+							"protocol": "https",
+							"host": [
+								"reqres",
+								"in"
+							],
+							"path": [
+								"api",
+								"users",
+								"4"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Tue, 27 Jun 2023 13:14:47 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Etag",
+							"value": "W/\"110-Xdg3LtI+q2zMxihHlfeIZQo/bvY\""
+						},
+						{
+							"key": "Via",
+							"value": "1.1 vegur"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "max-age=14400"
+						},
+						{
+							"key": "CF-Cache-Status",
+							"value": "HIT"
+						},
+						{
+							"key": "Age",
+							"value": "3757"
+						},
+						{
+							"key": "Report-To",
+							"value": "{\"endpoints\":[{\"url\":\"https:\\/\\/a.nel.cloudflare.com\\/report\\/v3?s=Y59aKiMPXpoFo9UG5iopZWrE8P3DKKujNBQRh4q1axlnD3VnRy6RyKu7crR3N%2FpPPqepvM0a3PdmKVHlXW5wtENH1AOpeLoR%2Bdr3l%2F9z%2Bg5B4EBYPjfPmLieVA%3D%3D\"}],\"group\":\"cf-nel\",\"max_age\":604800}"
+						},
+						{
+							"key": "NEL",
+							"value": "{\"success_fraction\":0,\"report_to\":\"cf-nel\",\"max_age\":604800}"
+						},
+						{
+							"key": "Vary",
+							"value": "Accept-Encoding"
+						},
+						{
+							"key": "Server",
+							"value": "cloudflare"
+						},
+						{
+							"key": "CF-RAY",
+							"value": "7dddf47c3a754b52-BKK"
+						},
+						{
+							"key": "Content-Encoding",
+							"value": "br"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"data\": {\n        \"id\": 4,\n        \"email\": \"eve.holt@reqres.in\",\n        \"first_name\": \"Eve\",\n        \"last_name\": \"Holt\",\n        \"avatar\": \"https://reqres.in/img/faces/4-image.jpg\"\n    },\n    \"support\": {\n        \"url\": \"https://reqres.in/#support-heading\",\n        \"text\": \"To keep ReqRes free, contributions towards server costs are appreciated!\"\n    }\n}"
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "url",
+			"value": "https://reqres.in",
+			"type": "string"
+		},
+		{
+			"key": "user4",
+			"value": ""
+		}
+	]
+}
