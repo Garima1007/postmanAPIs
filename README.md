@@ -1,4 +1,4 @@
-# API Testing Assignment
+# API Testing Assignment [![Automated API tests using Postman CLI](https://github.com/Garima1007/postmanAPIs/actions/workflows/pm.yml/badge.svg)](https://github.com/Garima1007/postmanAPIs/actions/workflows/pm.yml)
 
 The purpose of this assignment is to write the Test Cases of the following APIs and automate them using Postman or any similar tool
   1. GET API - https://reqres.in/api/users/
@@ -82,6 +82,3 @@ The API responds with a status code 200 OK which indicates that the request was 
 Next, we have used the stored values (as in previous requests) in assertions within our test script to verify that the response of this API matches with the stored information of id=4. Here, we are accessing the set variable(in the previous request) in a variable user4 using pm.collectionVariables.get().
 Now, since we want to validate the id, email, first_name, last_name and avatar against the value of a set variable, we extraxt the value of each of these fields from the response body and assign them to a responseValue variable in each of our tests.
 Next, we are retrieving the value of the set variable in expectedValue variable in each of the tests and finally we will use pm.expect() function along with .to.eql() as assertion to compare responseValue with expectedValue. If they match, the test will pass. Else, the test will fail.
-
-
-[![Automated API tests using Postman CLI](https://github.com/Garima1007/postmanAPIs/actions/workflows/pm.yml/badge.svg)](https://github.com/Garima1007/postmanAPIs/actions/workflows/pm.yml)
